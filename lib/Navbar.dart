@@ -20,12 +20,18 @@ class _NavBarState extends State<NavBar> {
         // ),
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AnimatedBottomNavigationBar(
-          icons: [Icons.healing, Icons.book, Icons.list, Icons.person],
-          gapLocation: GapLocation.center,
+          icons: [
+            Icons.healing,
+            Icons.book,
+            Icons.list,
+            Icons.person,
+          ],
+          gapLocation: GapLocation.none,
           activeIndex: _bottomIndex,
           notchSmoothness: NotchSmoothness.smoothEdge,
           leftCornerRadius: 20,
           rightCornerRadius: 20,
+          activeColor: Colors.blue[900],
           onTap: ((index) {
             setState(() {
               _bottomIndex = index;

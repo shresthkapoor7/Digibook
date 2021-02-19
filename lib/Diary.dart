@@ -37,20 +37,23 @@ class _DiaryPageState extends State<DiaryPage> {
                       child: Text('Diary', style: TextStyle(fontSize: 35))),
                   Row(
                     children: [
-                      IconButton(
-                        color: Colors.black,
-                        icon: Icon(
-                          Icons.arrow_left,
+                      Transform(
+                        transform: Matrix4.translationValues(20, 0, 0),
+                        child: IconButton(
+                          color: Colors.black,
+                          icon: Icon(
+                            Icons.arrow_left,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _dateTime =
+                                  _dateTime.subtract(new Duration(days: 1));
+                              _date = _dateTime.day.toString() +
+                                  ' ' +
+                                  months[_dateTime.month - 1];
+                            });
+                          },
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _dateTime =
-                                _dateTime.subtract(new Duration(days: 1));
-                            _date = _dateTime.day.toString() +
-                                ' ' +
-                                months[_dateTime.month - 1];
-                          });
-                        },
                       ),
                       FlatButton(
                         child: Text(_date),
@@ -72,73 +75,87 @@ class _DiaryPageState extends State<DiaryPage> {
                           }
                         },
                       ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_right,
+                      Transform(
+                        transform: Matrix4.translationValues(-20, 0, 0),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_right,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _dateTime = _dateTime.add(new Duration(days: 1));
+                              _date = _dateTime.day.toString() +
+                                  ' ' +
+                                  months[_dateTime.month - 1];
+                            });
+                          },
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _dateTime = _dateTime.add(new Duration(days: 1));
-                            _date = _dateTime.day.toString() +
-                                ' ' +
-                                months[_dateTime.month - 1];
-                          });
-                        },
                       )
                     ],
                   )
                 ],
               ),
               Container(
-                height: height - 300,
-                width: width - 30,
-                child: Card(
+                  height: height - 300,
+                  width: width - 30,
+                  child: Card(
                     elevation: 8,
                     child: Stack(
                       children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: FutureBuilder(
-                            builder: (context, _getData) {
-                              if (_getData.connectionState ==
-                                      ConnectionState.none &&
-                                  _getData.hasData == null) {
-                                return Text("No Data");
-                              } else if (_getData.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Text("Loading Data.....");
-                              } else {
-                                return Text(diaryData);
-                              }
-                            },
-                            future: _getData(),
+                        SingleChildScrollView(
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: FutureBuilder(
+                                builder: (context, _getData) {
+                                  if (_getData.connectionState ==
+                                          ConnectionState.none &&
+                                      _getData.hasData == null) {
+                                    return Text("No Data");
+                                  } else if (_getData.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator();
+                                  } else {
+                                    return Text(diaryData);
+                                  }
+                                },
+                                future: _getData(),
+                              ),
+                            ),
                           ),
                         ),
                         Align(
                             alignment: Alignment.bottomRight,
                             child: Padding(
                               padding: EdgeInsets.only(bottom: 20),
-                              child: RaisedButton(
-                                elevation: 8,
-                                child: Icon(
-                                  Icons.edit,
-                                  color: Colors.blue,
+                              child: ButtonTheme(
+                                height: 50,
+                                child: RaisedButton(
+                                  elevation: 8,
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.blue,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        PageTransition(
+                                            type: PageTransitionType.fade,
+                                            duration:
+                                                Duration(milliseconds: 400),
+                                            child: EditText(
+                                              textFieldData: diaryData,
+                                            )));
+                                  },
+                                  shape: CircleBorder(),
+                                  color: Colors.white,
                                 ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          type: PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 400),
-                                          child: EditText()));
-                                },
-                                shape: CircleBorder(),
-                                color: Colors.white,
                               ),
                             ))
                       ],
-                    )),
-              ),
+                    ),
+                  )),
             ],
           ),
         ),
@@ -154,6 +171,9 @@ Future<String> _getData() async {
 }
 
 class EditText extends StatefulWidget {
+  final String textFieldData;
+
+  const EditText({Key key, this.textFieldData}) : super(key: key);
   @override
   EditTextState createState() => EditTextState();
 }
@@ -166,6 +186,7 @@ class EditTextState extends State<EditText> {
     final RoundedLoadingButtonController _btnController =
         new RoundedLoadingButtonController();
     String data;
+    bool _saved = false;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -176,28 +197,35 @@ class EditTextState extends State<EditText> {
                 SizedBox(
                   height: 30,
                 ),
-                _textField(height: height - 360, width: width - 30),
+                _textField(
+                    textFieldData: widget.textFieldData,
+                    height: height - 360,
+                    width: width - 30),
                 Align(
                     alignment: Alignment.bottomCenter,
-                    child: RaisedButton(
-                      //controller: _btnController,
-                      // height: 50,
-                      // width: 50,
-                      child: Text("Save",
-                          style: TextStyle(fontSize: 20, color: Colors.white)),
-                      onPressed: () {
-                        setState(() async {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          prefs.setString(_date + "diary", _tempData);
-                          Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.fade,
-                                  child: NavBar()));
-                        });
-                      },
-                    ))
+                    child: (!_saved)
+                        ? RaisedButton(
+                            //controller: _btnController,
+                            // height: 50,
+                            // width: 50,
+                            child: Text("Save",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            onPressed: () {
+                              setState(() async {
+                                _saved = true;
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setString(_date + "diary", _tempData);
+                                Navigator.pushReplacement(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.fade,
+                                        child: NavBar()));
+                              });
+                            },
+                          )
+                        : Center(child: CircularProgressIndicator()))
               ],
             ),
           ),
@@ -210,7 +238,7 @@ class EditTextState extends State<EditText> {
 String _tempData;
 Widget _textField(
     {bool obscure = false,
-    int detailInfo = 0,
+    String textFieldData,
     TextInputType input = TextInputType.multiline,
     double height = 50,
     double width = 200}) {
@@ -230,9 +258,10 @@ Widget _textField(
       ],
       borderRadius: BorderRadius.all(Radius.circular(30)),
     ),
-    child: TextField(
+    child: TextFormField(
       obscureText: obscure,
       keyboardType: input,
+      initialValue: textFieldData,
       maxLines: null,
       decoration: InputDecoration(border: InputBorder.none),
       onChanged: (value) {

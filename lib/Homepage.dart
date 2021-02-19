@@ -201,7 +201,6 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         height: height / 3 + 20,
                         width: width / 3 + 40,
-                        color: Colors.red,
                         child: Stack(
                           children: [
                             Padding(
