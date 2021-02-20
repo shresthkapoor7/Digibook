@@ -96,7 +96,7 @@ class _DiaryPageState extends State<DiaryPage> {
                 ],
               ),
               Container(
-                  height: height - 300,
+                  height: height - 270,
                   width: width - 30,
                   child: Card(
                     elevation: 8,

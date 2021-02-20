@@ -22,8 +22,8 @@ class _ShoppingListState extends State<ShoppingList> {
         child: Scaffold(
       body: Center(
           child: Container(
-        // height: height,
-        width: width - 20,
+        height: height - 200,
+        width: width - 30,
         child: Stack(
           children: [
             Align(
@@ -72,6 +72,26 @@ class _ShoppingListState extends State<ShoppingList> {
                     future: _getDetails(),
                   )),
             ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 25, right: 5),
+                child: ButtonTheme(
+                  height: 50,
+                  child: RaisedButton(
+                    elevation: 8,
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.blue,
+                      size: 30,
+                    ),
+                    shape: CircleBorder(),
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       )),
@@ -79,8 +99,7 @@ class _ShoppingListState extends State<ShoppingList> {
   }
 }
 
-List<String> shoppingList = ['NO DATA'];
-List<String> temp = [];
+List<String> shoppingList = [];
 void _setDetails() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setStringList('key', null);
