@@ -9,7 +9,7 @@ class NavBar extends StatefulWidget {
   _NavBarState createState() => _NavBarState();
 }
 
-int _bottomIndex = 2;
+int _bottomIndex = 0;
 
 class _NavBarState extends State<NavBar> {
   @override
@@ -27,16 +27,21 @@ class _NavBarState extends State<NavBar> {
             Icons.list,
             Icons.person,
           ],
+          backgroundColor: Colors.black,
           gapLocation: GapLocation.none,
           activeIndex: _bottomIndex,
           notchSmoothness: NotchSmoothness.smoothEdge,
-          leftCornerRadius: 20,
-          rightCornerRadius: 20,
+          inactiveColor: Colors.white,
+          splashColor: Colors.blue[900],
+          // leftCornerRadius: 20,
+          // rightCornerRadius: 20,
           activeColor: Colors.blue[900],
           onTap: ((index) {
-            setState(() {
-              _bottomIndex = index;
-            });
+            if (index != _bottomIndex) {
+              setState(() {
+                _bottomIndex = index;
+              });
+            }
           }),
         ),
         body: (_bottomIndex == 0)

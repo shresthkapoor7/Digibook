@@ -20,6 +20,7 @@ class _ShoppingListState extends State<ShoppingList> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.black87,
       body: Center(
           child: Container(
         height: height - 200,
@@ -33,32 +34,39 @@ class _ShoppingListState extends State<ShoppingList> {
             Padding(
               padding: EdgeInsets.only(top: 50),
               child: Card(
+                  color: Colors.black26,
                   elevation: 8,
                   child: FutureBuilder(
                     builder: (context, data) {
-                      if (data.connectionState == ConnectionState.none) {
-                        return Text("SOME ERROR OCCURED");
-                      } else if (data.connectionState ==
-                          ConnectionState.waiting) {
-                        return CircularProgressIndicator();
-                      }
+                      // if (data.connectionState == ConnectionState.none) {
+                      //   return Text("SOME ERROR OCCURED");
+                      // } else if (data.connectionState ==
+                      //     ConnectionState.waiting) {
+                      //   return CircularProgressIndicator();
+                      // }
                       return ListView.builder(
                         itemCount:
                             (shoppingList == null) ? 0 : shoppingList.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
-                            leading: Checkbox(
-                              value: _checkBoxValues[index],
-                              onChanged: (value) {
-                                setState(() {
-                                  _checkBoxValues[index] = value;
-                                });
-                              },
-                            ),
+                            leading: Theme(
+                                child: Checkbox(
+                                  value: _checkBoxValues[index],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _checkBoxValues[index] = value;
+                                    });
+                                  },
+                                ),
+                                data: ThemeData(
+                                  primarySwatch: Colors.blue,
+                                  unselectedWidgetColor: Colors.white,
+                                )),
                             title: Text(
                               shoppingList[index].toString(),
                               style: TextStyle(
+                                color: Colors.white,
                                 fontSize: 20,
                                 decoration: (_checkBoxValues[index])
                                     ? TextDecoration.lineThrough
@@ -87,7 +95,7 @@ class _ShoppingListState extends State<ShoppingList> {
                       size: 30,
                     ),
                     shape: CircleBorder(),
-                    color: Colors.white,
+                    color: Colors.grey[900],
                   ),
                 ),
               ),
@@ -99,10 +107,10 @@ class _ShoppingListState extends State<ShoppingList> {
   }
 }
 
-List<String> shoppingList = [];
+List<String> shoppingList = ['This', 'is', 'a', 'Shopping list'];
 void _setDetails() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setStringList('key', null);
+  prefs.setStringList('key', shoppingList);
 }
 
 Future<List> _getDetails() async {

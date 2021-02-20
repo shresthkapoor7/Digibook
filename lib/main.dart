@@ -9,6 +9,11 @@ Future<void> main() async {
   runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder: (context) => MaterialApp(
+        theme: ThemeData(
+            textTheme: TextTheme(
+                    bodyText1: TextStyle(color: Colors.white),
+                    bodyText2: TextStyle(color: Colors.white))
+                .apply(bodyColor: Colors.white, displayColor: Colors.white)),
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         home: NavBar()),

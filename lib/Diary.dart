@@ -26,6 +26,7 @@ class _DiaryPageState extends State<DiaryPage> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black87,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -43,6 +44,7 @@ class _DiaryPageState extends State<DiaryPage> {
                           color: Colors.black,
                           icon: Icon(
                             Icons.arrow_left,
+                            color: Colors.white,
                           ),
                           onPressed: () {
                             setState(() {
@@ -56,7 +58,8 @@ class _DiaryPageState extends State<DiaryPage> {
                         ),
                       ),
                       FlatButton(
-                        child: Text(_date),
+                        child:
+                            Text(_date, style: TextStyle(color: Colors.white)),
                         onPressed: () async {
                           final DateTime _pickedDate = await showDatePicker(
                             context: context,
@@ -80,6 +83,7 @@ class _DiaryPageState extends State<DiaryPage> {
                         child: IconButton(
                           icon: Icon(
                             Icons.arrow_right,
+                            color: Colors.white,
                           ),
                           onPressed: () {
                             setState(() {
@@ -99,6 +103,7 @@ class _DiaryPageState extends State<DiaryPage> {
                   height: height - 270,
                   width: width - 30,
                   child: Card(
+                    color: Colors.black26,
                     elevation: 8,
                     child: Stack(
                       children: [
@@ -109,16 +114,7 @@ class _DiaryPageState extends State<DiaryPage> {
                               padding: EdgeInsets.all(20.0),
                               child: FutureBuilder(
                                 builder: (context, _getData) {
-                                  if (_getData.connectionState ==
-                                          ConnectionState.none &&
-                                      _getData.hasData == null) {
-                                    return Text(" ");
-                                  } else if (_getData.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator();
-                                  } else {
-                                    return Text(diaryData);
-                                  }
+                                  return Text(diaryData);
                                 },
                                 future: _getData(),
                               ),
@@ -149,7 +145,7 @@ class _DiaryPageState extends State<DiaryPage> {
                                             )));
                                   },
                                   shape: CircleBorder(),
-                                  color: Colors.white,
+                                  color: Colors.grey[900],
                                 ),
                               ),
                             ))
