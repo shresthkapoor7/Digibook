@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:digibook/Diary.dart';
+import 'package:digibook/Shopping.dart';
 import 'package:flutter/material.dart';
 import 'Homepage.dart';
 
@@ -8,7 +9,7 @@ class NavBar extends StatefulWidget {
   _NavBarState createState() => _NavBarState();
 }
 
-int _bottomIndex = 0;
+int _bottomIndex = 2;
 
 class _NavBarState extends State<NavBar> {
   @override
@@ -42,8 +43,8 @@ class _NavBarState extends State<NavBar> {
             ? HomePage()
             : (_bottomIndex == 1)
                 ? DiaryPage()
-                : Center(
-                    child: Text("Another page"),
-                  ));
+                : (_bottomIndex == 2)
+                    ? ShoppingList()
+                    : Center(child: Text('Profil page')));
   }
 }

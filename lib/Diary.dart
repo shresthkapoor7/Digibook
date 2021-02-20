@@ -112,7 +112,7 @@ class _DiaryPageState extends State<DiaryPage> {
                                   if (_getData.connectionState ==
                                           ConnectionState.none &&
                                       _getData.hasData == null) {
-                                    return Text("No Data");
+                                    return Text(" ");
                                   } else if (_getData.connectionState ==
                                       ConnectionState.waiting) {
                                     return CircularProgressIndicator();
@@ -166,7 +166,7 @@ class _DiaryPageState extends State<DiaryPage> {
 
 Future<String> _getData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  diaryData = prefs.getString(_date + "diary") ?? 'No Data';
+  diaryData = prefs.getString(_date + "diary") ?? ' ';
   return diaryData;
 }
 
@@ -190,44 +190,56 @@ class EditTextState extends State<EditText> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                _textField(
-                    textFieldData: widget.textFieldData,
-                    height: height - 360,
-                    width: width - 30),
-                Align(
-                    alignment: Alignment.bottomCenter,
-                    child: (!_saved)
-                        ? RaisedButton(
-                            //controller: _btnController,
-                            // height: 50,
-                            // width: 50,
-                            child: Text("Save",
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white)),
-                            onPressed: () {
-                              setState(() async {
-                                _saved = true;
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                prefs.setString(_date + "diary", _tempData);
-                                Navigator.pushReplacement(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.fade,
-                                        child: NavBar()));
-                              });
-                            },
-                          )
-                        : Center(child: CircularProgressIndicator()))
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                height: 30,
+              ),
+              Text(_date, style: TextStyle(fontSize: 30)),
+              SizedBox(
+                height: 30,
+              ),
+              _textField(
+                  textFieldData: widget.textFieldData,
+                  height: height - 360,
+                  width: width - 30),
+              SizedBox(
+                height: 20,
+              ),
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: (!_saved)
+                      ? RaisedButton(
+                          color: Colors.blue,
+                          child: Container(
+                            height: 50,
+                            width: 100,
+                            child: Center(
+                              child: Text("Save",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white)),
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                          ),
+                          onPressed: () {
+                            setState(() async {
+                              _saved = true;
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setString(_date + "diary", _tempData);
+                              Navigator.pushReplacement(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: NavBar()));
+                            });
+                          },
+                        )
+                      : Center(child: CircularProgressIndicator()))
+            ],
           ),
         ),
       ),
@@ -250,7 +262,7 @@ Widget _textField(
       color: Colors.white.withOpacity(0.9),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey[300],
+          color: Colors.grey[400],
           offset: Offset(5.0, 5.0),
           blurRadius: 5.0,
           spreadRadius: 2,
