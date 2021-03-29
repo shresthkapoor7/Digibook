@@ -28,10 +28,10 @@ List<String> images = [
   'assets/Images/dinner.png',
 ];
 
-List<String> meal = [
-  'Breakfast',
-  'Lunch',
-  'Dinner',
+List<List<String>> meal = [
+  ['Breafast', 'Bread', 'Eggs', 'Pancakes', '555'],
+  ['Lunch', 'Chappati', 'Rice', 'Dal', '1000'],
+  ['Dinner', 'Pizza', 'Burger', 'Steak', '1200']
 ];
 
 List<List<Color>> colors = [
@@ -46,6 +46,8 @@ List<List<Color>> colors = [
   ]
 ];
 
+List<Color> shadowColors = [Colors.pink, Colors.blue, Colors.brown];
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.grey[200],
           body: Container(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                                 height: height / 3,
                                 child: Card(
                                   elevation: 8,
-                                  shadowColor: Colors.pink[100],
+                                  shadowColor: shadowColors[index],
                                   child: Container(
                                     child: Column(
                                       children: [
@@ -100,8 +102,9 @@ class _HomePageState extends State<HomePage> {
                                                   //style: DefaultTextStyle.of(context).style,
                                                   children: [
                                                     TextSpan(
-                                                        text: meal[index] +
-                                                            '\n\n',
+                                                        text: meal[index][0] +
+                                                            '\n' +
+                                                            '\n',
                                                         style: TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
@@ -109,14 +112,18 @@ class _HomePageState extends State<HomePage> {
                                                             color:
                                                                 Colors.white)),
                                                     TextSpan(
-                                                        text:
-                                                            'Bread,\nEggs,\nPancakes,\n',
+                                                        text: meal[index][1] +
+                                                            '\n' +
+                                                            meal[index][2] +
+                                                            '\n' +
+                                                            meal[index][3] +
+                                                            '\n\n',
                                                         style: TextStyle(
                                                           fontSize: 17,
                                                           color: Colors.white,
                                                         )),
                                                     TextSpan(
-                                                        text: '\n555',
+                                                        text: meal[index][4],
                                                         style: TextStyle(
                                                           fontSize: 25,
                                                           fontWeight:

@@ -6,18 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:passcode_screen/passcode_screen.dart';
 
 Future<void> main() async {
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MaterialApp(
+  runApp(
+    MaterialApp(
         theme: ThemeData(
             textTheme: TextTheme(
-                    bodyText1: TextStyle(color: Colors.white),
-                    bodyText2: TextStyle(color: Colors.white))
-                .apply(bodyColor: Colors.white, displayColor: Colors.white)),
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+                    bodyText1: TextStyle(color: Colors.black),
+                    bodyText2: TextStyle(color: Colors.black))
+                .apply(bodyColor: Colors.black, displayColor: Colors.black)),
         home: NavBar()),
-  ));
+  );
 }
 
 class Passcode extends StatefulWidget {

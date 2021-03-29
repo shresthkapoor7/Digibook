@@ -24,7 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
   animated_bottom_navigation_bar: ^0.2.1
-  local_auth: ^0.6.3+4
   passcode_screen: ^1.2.2+1
   device_preview: ^0.5.5
   shared_preferences: ^0.5.12+4

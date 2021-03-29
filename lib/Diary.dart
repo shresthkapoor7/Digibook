@@ -26,7 +26,7 @@ class _DiaryPageState extends State<DiaryPage> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.grey[200],
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -44,7 +44,7 @@ class _DiaryPageState extends State<DiaryPage> {
                           color: Colors.black,
                           icon: Icon(
                             Icons.arrow_left,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           onPressed: () {
                             setState(() {
@@ -57,14 +57,14 @@ class _DiaryPageState extends State<DiaryPage> {
                           },
                         ),
                       ),
-                      FlatButton(
+                      TextButton(
                         child:
-                            Text(_date, style: TextStyle(color: Colors.white)),
+                            Text(_date, style: TextStyle(color: Colors.black)),
                         onPressed: () async {
                           final DateTime _pickedDate = await showDatePicker(
                             context: context,
                             firstDate: DateTime(1900),
-                            lastDate: DateTime.now(),
+                            lastDate: DateTime(2100),
                             currentDate: DateTime.now(),
                             initialDate: DateTime.now(),
                           );
@@ -83,7 +83,7 @@ class _DiaryPageState extends State<DiaryPage> {
                         child: IconButton(
                           icon: Icon(
                             Icons.arrow_right,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           onPressed: () {
                             setState(() {
@@ -103,7 +103,7 @@ class _DiaryPageState extends State<DiaryPage> {
                   height: height - 270,
                   width: width - 30,
                   child: Card(
-                    color: Colors.black26,
+                    color: Colors.white,
                     elevation: 8,
                     child: Stack(
                       children: [
@@ -124,29 +124,29 @@ class _DiaryPageState extends State<DiaryPage> {
                         Align(
                             alignment: Alignment.bottomRight,
                             child: Padding(
-                              padding: EdgeInsets.only(bottom: 20),
-                              child: ButtonTheme(
-                                height: 50,
-                                child: RaisedButton(
-                                  elevation: 8,
+                              padding: EdgeInsets.only(bottom: 20, right: 10),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: CircleBorder(),
+                                    primary: Colors.white,
+                                    elevation: 8),
+                                child: Container(
+                                  height: 45,
                                   child: Icon(
                                     Icons.edit,
                                     color: Colors.blue,
                                   ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        PageTransition(
-                                            type: PageTransitionType.fade,
-                                            duration:
-                                                Duration(milliseconds: 400),
-                                            child: EditText(
-                                              textFieldData: diaryData,
-                                            )));
-                                  },
-                                  shape: CircleBorder(),
-                                  color: Colors.grey[900],
                                 ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          type: PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 400),
+                                          child: EditText(
+                                            textFieldData: diaryData,
+                                          )));
+                                },
                               ),
                             ))
                       ],
