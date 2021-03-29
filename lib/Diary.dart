@@ -26,7 +26,7 @@ class _DiaryPageState extends State<DiaryPage> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.grey[100],
         body: SingleChildScrollView(
           child: Column(
             children: [
