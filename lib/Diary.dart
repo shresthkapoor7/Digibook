@@ -12,7 +12,7 @@ class DiaryPage extends StatefulWidget {
 
 DateTime _dateTime = DateTime.now();
 String _date = _dateTime.day.toString() + ' ' + months[_dateTime.month - 1];
-String diaryData = 'abcd';
+String diaryData = '';
 
 class _DiaryPageState extends State<DiaryPage> {
   void initState() {
