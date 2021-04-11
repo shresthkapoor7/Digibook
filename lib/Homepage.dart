@@ -62,10 +62,12 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 25, bottom: 30),
-                child: Text("Your Diet", style: TextStyle(fontSize: 25)),
+                child: Text("Your Diet",
+                    style: TextStyle(
+                        fontSize: width * 0.09, fontWeight: FontWeight.w500)),
               ),
               Padding(
-                  padding: EdgeInsets.only(left: 25, top: 30),
+                  padding: EdgeInsets.only(left: 25),
                   child: Text(
                     'Meals today',
                     style: TextStyle(fontSize: 25),
@@ -179,6 +181,18 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 25.0),
+                child: Text("BMI Calculator",
+                    style: TextStyle(
+                        fontSize: width * 0.06, fontWeight: FontWeight.w400)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 25, right: 25),
+                child: Row(
+                  children: [],
                 ),
               )
             ],

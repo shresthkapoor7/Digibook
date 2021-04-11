@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:digibook/Diary.dart';
+import 'package:digibook/Reminders.dart';
 import 'package:digibook/Shopping.dart';
 import 'package:flutter/material.dart';
 import 'Homepage.dart';
@@ -58,6 +59,6 @@ class _NavBarState extends State<NavBar> {
                 ? DiaryPage()
                 : (_bottomIndex == 2)
                     ? ShowShoppingList()
-                    : Center(child: Text('Profile page')));
+                    : RemindersPage());
   }
 }
