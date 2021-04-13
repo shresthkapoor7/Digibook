@@ -16,11 +16,6 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {},
-        //   child: Icon(Icons.add),
-        // ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         resizeToAvoidBottomInset: false,
         bottomNavigationBar: Container(
           decoration: BoxDecoration(

@@ -25,11 +25,11 @@ dependencies:
     sdk: flutter
   animated_bottom_navigation_bar: ^0.2.1
   passcode_screen: ^1.2.2+1
-  device_preview: ^0.5.5
   shared_preferences: ^0.5.12+4
   rounded_loading_button: ^1.0.0
   page_transition: ^1.1.7+6
-
+  hexcolor:
+  intl: ^0.16.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
