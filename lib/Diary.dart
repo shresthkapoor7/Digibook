@@ -155,15 +155,15 @@ class _DiaryPageState extends State<DiaryPage> {
                           ),
                         ),
                         Align(
-                            alignment: Alignment.bottomRight,
+                            alignment: Alignment.bottomCenter,
                             child: Padding(
-                              padding: EdgeInsets.only(bottom: 20, right: 10),
+                              padding: EdgeInsets.only(bottom: 20, right: 0),
                               child: IconButton(
                                 icon: Container(
                                   height: 45,
                                   child: Icon(
                                     Icons.edit,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     size: height * 0.04,
                                   ),
                                 ),
@@ -174,8 +174,13 @@ class _DiaryPageState extends State<DiaryPage> {
                                           type: PageTransitionType.fade,
                                           duration: Duration(milliseconds: 400),
                                           child: EditText(
-                                            textFieldData: diaryData,
-                                            textFieldTitleData: diaryTitleData,
+                                            textFieldData: (diaryData == '')
+                                                ? diaryData
+                                                : null,
+                                            textFieldTitleData:
+                                                (diaryTitleData == '')
+                                                    ? diaryTitleData
+                                                    : null,
                                           )));
                                 },
                               ),

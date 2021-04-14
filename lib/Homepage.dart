@@ -97,115 +97,124 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             height: height / 3 + 20,
                             width: width / 3 + 40,
-                            child: Stack(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 25),
-                                  child: Container(
-                                    height: height / 3,
-                                    child: Card(
-                                      elevation: 8,
-                                      shadowColor: shadowColors[index],
-                                      child: Container(
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 70, right: 20),
-                                                child: RichText(
-                                                  text: TextSpan(
-                                                      //style: DefaultTextStyle.of(context).style,
-                                                      children: [
-                                                        TextSpan(
-                                                            text: timeOfMeal[
-                                                                    index] +
-                                                                '\n' +
-                                                                '\n',
-                                                            style: TextStyle(
-                                                                fontSize: 20,
+                            child: TextButton(
+                              onPressed: () {
+                                showAlertDialog(context, index);
+                              },
+                              child: Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 25),
+                                    child: Container(
+                                      height: height / 3,
+                                      child: Card(
+                                        elevation: 8,
+                                        shadowColor: shadowColors[index],
+                                        child: Container(
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 70, right: 20),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                        //style: DefaultTextStyle.of(context).style,
+                                                        children: [
+                                                          TextSpan(
+                                                              text: timeOfMeal[
+                                                                      index] +
+                                                                  '\n' +
+                                                                  '\n',
+                                                              style: TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white)),
+                                                          for (int c = 0;
+                                                              c <
+                                                                  meal[index]
+                                                                          .length -
+                                                                      1;
+                                                              c++)
+                                                            TextSpan(
+                                                                text:
+                                                                    meal[index][
+                                                                            c] +
+                                                                        '\n',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 17,
+                                                                  color: Colors
+                                                                      .white,
+                                                                )),
+                                                          TextSpan(
+                                                              text: '\n' +
+                                                                  meal[index][
+                                                                      meal[index]
+                                                                              .length -
+                                                                          1],
+                                                              style: TextStyle(
+                                                                fontSize: 25,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold,
                                                                 color: Colors
-                                                                    .white)),
-                                                        for (int c = 0;
-                                                            c <
-                                                                meal[index]
-                                                                        .length -
-                                                                    1;
-                                                            c++)
-                                                          TextSpan(
-                                                              text: meal[index]
-                                                                      [c] +
-                                                                  '\n',
-                                                              style: TextStyle(
-                                                                fontSize: 17,
-                                                                color: Colors
                                                                     .white,
                                                               )),
-                                                        TextSpan(
-                                                            text: '\n' +
-                                                                meal[
-                                                                    index][meal[
-                                                                            index]
-                                                                        .length -
-                                                                    1],
-                                                            style: TextStyle(
-                                                              fontSize: 25,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.white,
-                                                            )),
-                                                        TextSpan(
-                                                            text: ' kcal',
-                                                            style: TextStyle(
-                                                              fontSize: 15,
-                                                              color:
-                                                                  Colors.white,
-                                                            ))
-                                                      ]),
-                                                )),
-                                          ],
+                                                          TextSpan(
+                                                              text: ' kcal',
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .white,
+                                                              ))
+                                                        ]),
+                                                  )),
+                                            ],
+                                          ),
+                                          // height:
+                                          //     MediaQuery.of(context).size.height / 3,
+                                          width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  3 +
+                                              30,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(100),
+                                                  topLeft: Radius.circular(10),
+                                                  bottomLeft:
+                                                      Radius.circular(10),
+                                                  bottomRight:
+                                                      Radius.circular(10)),
+                                              gradient: LinearGradient(
+                                                colors: colors[index],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              )),
                                         ),
-                                        // height:
-                                        //     MediaQuery.of(context).size.height / 3,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                    3 +
-                                                30,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(100),
-                                                topLeft: Radius.circular(10),
-                                                bottomLeft: Radius.circular(10),
-                                                bottomRight:
-                                                    Radius.circular(10)),
-                                            gradient: LinearGradient(
-                                              colors: colors[index],
-                                              begin: Alignment.topLeft,
-                                              end: Alignment.bottomRight,
-                                            )),
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(100),
-                                            topLeft: Radius.circular(10),
-                                            bottomLeft: Radius.circular(10),
-                                            bottomRight: Radius.circular(10)),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(100),
+                                              topLeft: Radius.circular(10),
+                                              bottomLeft: Radius.circular(10),
+                                              bottomRight: Radius.circular(10)),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Image.asset(
-                                    images[index].toString(),
-                                    scale: 3,
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Image.asset(
+                                      images[index].toString(),
+                                      scale: 3,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -340,6 +349,91 @@ class _HomePageState extends State<HomePage> {
               )),
             )),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context, int time) {
+    String meal1 = '';
+    String meal2 = '';
+    String meal3 = '';
+    String calories = '';
+    Widget okButton = FlatButton(
+      child: Text(
+        "Ok",
+        style: TextStyle(color: Colors.blue),
+      ),
+      onPressed: () {
+        if (meal1.length + meal2.length + meal3.length != 0 && calories != '') {
+          setState(() {
+            meal[time] = [meal1, meal2, meal3, calories];
+          });
+        }
+        Navigator.pop(context);
+      },
+    );
+    Widget textField1 = TextFormField(
+      textCapitalization: TextCapitalization.sentences,
+      style: TextStyle(color: Colors.black),
+      decoration: InputDecoration(hintText: "Meal 1"),
+      onChanged: (value) {
+        setState(() {
+          meal1 = value;
+        });
+      },
+    );
+    Widget textField2 = TextFormField(
+      textCapitalization: TextCapitalization.sentences,
+      style: TextStyle(color: Colors.black),
+      decoration: InputDecoration(hintText: "Meal 2"),
+      onChanged: (value) {
+        setState(() {
+          meal2 = value;
+        });
+      },
+    );
+
+    Widget textField3 = TextFormField(
+      textCapitalization: TextCapitalization.sentences,
+      style: TextStyle(color: Colors.black),
+      decoration: InputDecoration(hintText: "Meal 3"),
+      onChanged: (value) {
+        setState(() {
+          meal3 = value;
+        });
+      },
+    );
+
+    Widget textField4 = TextFormField(
+        textCapitalization: TextCapitalization.sentences,
+        style: TextStyle(color: Colors.black),
+        decoration: InputDecoration(hintText: "Total Calories"),
+        onChanged: (value) {
+          setState(() {
+            calories = value;
+          });
+        });
+
+    AlertDialog alert = AlertDialog(
+      title: Text(timeOfMeal[time], style: TextStyle(color: Colors.black)),
+      content: Column(
+        children: [
+          textField1,
+          textField2,
+          textField3,
+          textField4,
+        ],
+      ),
+      actions: [
+        okButton,
+      ],
+      backgroundColor: Colors.white,
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+      barrierDismissible: true,
     );
   }
 }
